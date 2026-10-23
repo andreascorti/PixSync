@@ -9,6 +9,8 @@ final class SyncStore: ObservableObject {
   @Published private(set) var unmatchedDestinationItems: [DestinationItem] = []
   @Published private(set) var ambiguousMatches: [AmbiguousMatch] = []
   private var dismissedRemovalIDs = Set<String>()
+  private var reconciledDestinationPath: String?
+  private var lastReconciliationDate: Date?
 
   private let storeURL: URL
   private let encoder = JSONEncoder()
@@ -55,19 +57,14 @@ final class SyncStore: ObservableObject {
     matched: Int, unmatched: Int
   ) {
     let known = Set(records.values.map(\.relativePath))
-    var assetsByName: [String: [PHAsset]] = [:]
-    for (index, asset) in assets.enumerated() {
-      for resource in PHAssetResource.assetResources(for: asset)
-      where resource.type == .photo || resource.type == .video {
-        assetsByName[resource.originalFilename, default: []].append(asset)
-      }
-      if index % 256 == 255 { try? await Task.sleep(for: .milliseconds(1)) }
-    }
+    let destinationPath = root.standardizedFileURL.path
+    let shouldMatchPhotos =
+      reconciledDestinationPath != destinationPath || lastReconciliationDate == nil
     var matched = 0
-    var unmatched = 0
     var unmatchedItems: [DestinationItem] = []
     var uncertain: [AmbiguousMatch] = []
     var matchedRecords: [ExportRecord] = []
+    var filesToMatch: [(url: URL, relativePath: String)] = []
     guard
       let enumerator = FileManager.default.enumerator(
         at: root, includingPropertiesForKeys: [.isRegularFileKey, .isDirectoryKey],
@@ -80,7 +77,6 @@ final class SyncStore: ObservableObject {
       let values = try? file.resourceValues(forKeys: [.isRegularFileKey, .isDirectoryKey])
       let relative = String(file.path.dropFirst(root.path.count + 1))
       if values?.isDirectory == true {
-        unmatched += 1
         unmatchedItems.append(DestinationItem(relativePath: relative, isDirectory: true))
         continue
       }
@@ -88,28 +84,51 @@ final class SyncStore: ObservableObject {
         continue
       }
       guard !known.contains(relative) else { continue }
-      let candidates = assetsByName[file.lastPathComponent] ?? []
-      if candidates.count == 1, let asset = candidates.first {
-        let record = ExportRecord(
-          assetID: asset.localIdentifier, kind: .original, relativePath: relative,
-          filename: file.lastPathComponent, modificationDate: asset.modificationDate,
-          fingerprint: fingerprint(asset))
-        matchedRecords.append(record)
-        matched += 1
+      if shouldMatchPhotos {
+        filesToMatch.append((file, relative))
       } else {
-        unmatched += 1
         unmatchedItems.append(DestinationItem(relativePath: relative, isDirectory: false))
-        if candidates.count > 1 {
-          uncertain.append(
-            AmbiguousMatch(filename: file.lastPathComponent, candidateCount: candidates.count))
+      }
+    }
+
+    // Empty destinations and previously reconciled destinations need no Photos filename scan.
+    if shouldMatchPhotos && !filesToMatch.isEmpty {
+      var assetsByName: [String: [PHAsset]] = [:]
+      for (index, asset) in assets.enumerated() {
+        for resource in PHAssetResource.assetResources(for: asset)
+        where resource.type == .photo || resource.type == .video {
+          assetsByName[resource.originalFilename, default: []].append(asset)
+        }
+        if index % 256 == 255 { try? await Task.sleep(for: .milliseconds(1)) }
+      }
+      for (file, relative) in filesToMatch {
+        let candidates = assetsByName[file.lastPathComponent] ?? []
+        if candidates.count == 1, let asset = candidates.first {
+          let record = ExportRecord(
+            assetID: asset.localIdentifier, kind: .original, relativePath: relative,
+            filename: file.lastPathComponent, modificationDate: asset.modificationDate,
+            fingerprint: fingerprint(asset))
+          matchedRecords.append(record)
+          matched += 1
+        } else {
+          unmatchedItems.append(DestinationItem(relativePath: relative, isDirectory: false))
+          if candidates.count > 1 {
+            uncertain.append(
+              AmbiguousMatch(filename: file.lastPathComponent, candidateCount: candidates.count))
+          }
         }
       }
     }
     for record in matchedRecords { records[record.id] = record }
     if !matchedRecords.isEmpty { persist() }
+    if shouldMatchPhotos {
+      reconciledDestinationPath = destinationPath
+      lastReconciliationDate = Date()
+    }
     setUnmatchedDestinationItems(unmatchedItems)
     addAmbiguous(uncertain)
-    return (matched, unmatched)
+    persist()
+    return (matched, unmatchedItems.count)
   }
 
   func setUnmatchedDestinationItems(_ values: [DestinationItem]) {
@@ -147,13 +166,17 @@ final class SyncStore: ObservableObject {
     removedExports = state.removed
     unmatchedDestinationItems = state.unmatchedDestinationItems
     dismissedRemovalIDs = state.dismissedRemovalIDs
+    reconciledDestinationPath = state.reconciledDestinationPath
+    lastReconciliationDate = state.lastReconciliationDate
   }
 
   private func persist() {
     let state = PersistedState(
       records: Array(records.values), removed: removedExports,
       unmatchedDestinationItems: unmatchedDestinationItems,
-      dismissedRemovalIDs: dismissedRemovalIDs)
+      dismissedRemovalIDs: dismissedRemovalIDs,
+      reconciledDestinationPath: reconciledDestinationPath,
+      lastReconciliationDate: lastReconciliationDate)
     guard let data = try? encoder.encode(state) else { return }
     try? data.write(to: storeURL, options: .atomic)
   }
@@ -164,19 +187,25 @@ private struct PersistedState: Codable {
   let removed: [RemovedExport]
   let unmatchedDestinationItems: [DestinationItem]
   let dismissedRemovalIDs: Set<String>
+  let reconciledDestinationPath: String?
+  let lastReconciliationDate: Date?
 
   private enum CodingKeys: String, CodingKey {
     case records, removed, unmatchedDestinationItems, dismissedRemovalIDs
+    case reconciledDestinationPath, lastReconciliationDate
   }
 
   init(
     records: [ExportRecord], removed: [RemovedExport],
-    unmatchedDestinationItems: [DestinationItem] = [], dismissedRemovalIDs: Set<String> = []
+    unmatchedDestinationItems: [DestinationItem] = [], dismissedRemovalIDs: Set<String> = [],
+    reconciledDestinationPath: String? = nil, lastReconciliationDate: Date? = nil
   ) {
     self.records = records
     self.removed = removed
     self.unmatchedDestinationItems = unmatchedDestinationItems
     self.dismissedRemovalIDs = dismissedRemovalIDs
+    self.reconciledDestinationPath = reconciledDestinationPath
+    self.lastReconciliationDate = lastReconciliationDate
   }
 
   init(from decoder: Decoder) throws {
@@ -187,5 +216,8 @@ private struct PersistedState: Codable {
       try values.decodeIfPresent([DestinationItem].self, forKey: .unmatchedDestinationItems) ?? []
     dismissedRemovalIDs =
       try values.decodeIfPresent(Set<String>.self, forKey: .dismissedRemovalIDs) ?? []
+    reconciledDestinationPath =
+      try values.decodeIfPresent(String.self, forKey: .reconciledDestinationPath)
+    lastReconciliationDate = try values.decodeIfPresent(Date.self, forKey: .lastReconciliationDate)
   }
 }
