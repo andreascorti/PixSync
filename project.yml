@@ -1,0 +1,63 @@
+name: PixSync
+options:
+  bundleIdPrefix: com.pixsync
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+    CODE_SIGN_ENTITLEMENTS: PixSync/PixSync.entitlements
+    ENABLE_APP_SANDBOX: YES
+    ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+    GENERATE_INFOPLIST_FILE: YES
+    INFOPLIST_KEY_CFBundleDisplayName: PixSync
+    INFOPLIST_KEY_LSUIElement: YES
+    INFOPLIST_KEY_NSPhotoLibraryUsageDescription: PixSync reads your Photos library to export originals to your selected folder.
+    INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription: PixSync does not modify your Photos library.
+targets:
+  PixSync:
+    type: application
+    platform: macOS
+    sources:
+      - path: PixSync
+        excludes:
+          - Brand/**
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pixsync.app
+        PRODUCT_NAME: PixSync
+  PixSyncTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: PixSyncTests
+      - path: PixSync/Models.swift
+      - path: PixSync/SafeExport.swift
+      - path: PixSync/SyncStore.swift
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pixsync.tests
+        GENERATE_INFOPLIST_FILE: YES
+  PixSyncUITests:
+    type: bundle.ui-testing
+    platform: macOS
+    sources:
+      - path: PixSyncUITests
+    dependencies:
+      - target: PixSync
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.pixsync.uitests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  PixSync:
+    build:
+      targets:
+        PixSync: all
+        PixSyncTests: [test]
+        PixSyncUITests: [test]
+    test:
+      targets:
+        - PixSyncTests
+        - PixSyncUITests

@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01ADE8257C7A36397FC0F99B /* SafeExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDCA28C6D4B61ECFCDE106C /* SafeExport.swift */; };
+		14F4075EC7C20995617B5B86 /* PhotoSyncService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3F05F58F7D456F38522BC /* PhotoSyncService.swift */; };
+		215EEDFA1A404CE5E4571455 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214D55E609C6EDF364308ED /* Models.swift */; };
+		381FA7BD87ACEAB18EA1B4E1 /* SyncStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0017536DE3C20DB5043C7 /* SyncStore.swift */; };
+		4424775F2CCE41CFDCD3CB93 /* MenuBarFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6275DE1100FB4CB0E10AEF /* MenuBarFlowTests.swift */; };
+		4B7BAE8D90455E89A4B4E51E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6AC6B23AC6D47459C9BB538 /* Assets.xcassets */; };
+		7648614ED8D2F101ACDC7708 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E214D55E609C6EDF364308ED /* Models.swift */; };
+		85F1023394DCB7A6BAE02372 /* PixSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A371C777CDF7D5EBD11145A8 /* PixSyncApp.swift */; };
+		96BD517C7859444B53C25E72 /* SyncStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C0017536DE3C20DB5043C7 /* SyncStore.swift */; };
+		B88DB0613B5CEA3D7CB7740D /* SafeExportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D00849EC88DC9FDB7D41BA /* SafeExportTests.swift */; };
+		ECB7A10D00D13F74527E037C /* SafeExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BDCA28C6D4B61ECFCDE106C /* SafeExport.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		51370E76C18F22EDAE01C334 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC13D40F806513C557678445 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA1507816A51EA4C7FA40D0A;
+			remoteInfo = PixSync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		12DFE2615D30EFCB0B1991DD /* PixSync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixSync.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		14846152B85D1ACCA0DA103A /* PixSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PixSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1BDCA28C6D4B61ECFCDE106C /* SafeExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeExport.swift; sourceTree = "<group>"; };
+		344FC8277C8716EF15F72381 /* PixSyncUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PixSyncUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A6275DE1100FB4CB0E10AEF /* MenuBarFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarFlowTests.swift; sourceTree = "<group>"; };
+		73C0017536DE3C20DB5043C7 /* SyncStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncStore.swift; sourceTree = "<group>"; };
+		9D9E11E96C994B95395BB136 /* PixSync.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PixSync.entitlements; sourceTree = "<group>"; };
+		A1E3F05F58F7D456F38522BC /* PhotoSyncService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSyncService.swift; sourceTree = "<group>"; };
+		A371C777CDF7D5EBD11145A8 /* PixSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixSyncApp.swift; sourceTree = "<group>"; };
+		A5D00849EC88DC9FDB7D41BA /* SafeExportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeExportTests.swift; sourceTree = "<group>"; };
+		A6AC6B23AC6D47459C9BB538 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E214D55E609C6EDF364308ED /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2772A8F581A017A21F7095FB = {
+			isa = PBXGroup;
+			children = (
+				D910AF927A8E1D053350D3CD /* PixSync */,
+				E26BE50FA06BF6A1D1B8CD1C /* PixSyncTests */,
+				98F05FE3254F61FBCD3BDEF5 /* PixSyncUITests */,
+				6E2F37816F3AF45A87CE5BEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E2F37816F3AF45A87CE5BEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12DFE2615D30EFCB0B1991DD /* PixSync.app */,
+				14846152B85D1ACCA0DA103A /* PixSyncTests.xctest */,
+				344FC8277C8716EF15F72381 /* PixSyncUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		98F05FE3254F61FBCD3BDEF5 /* PixSyncUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6A6275DE1100FB4CB0E10AEF /* MenuBarFlowTests.swift */,
+			);
+			path = PixSyncUITests;
+			sourceTree = "<group>";
+		};
+		D910AF927A8E1D053350D3CD /* PixSync */ = {
+			isa = PBXGroup;
+			children = (
+				A6AC6B23AC6D47459C9BB538 /* Assets.xcassets */,
+				E214D55E609C6EDF364308ED /* Models.swift */,
+				A1E3F05F58F7D456F38522BC /* PhotoSyncService.swift */,
+				9D9E11E96C994B95395BB136 /* PixSync.entitlements */,
+				A371C777CDF7D5EBD11145A8 /* PixSyncApp.swift */,
+				1BDCA28C6D4B61ECFCDE106C /* SafeExport.swift */,
+				73C0017536DE3C20DB5043C7 /* SyncStore.swift */,
+			);
+			path = PixSync;
+			sourceTree = "<group>";
+		};
+		E26BE50FA06BF6A1D1B8CD1C /* PixSyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5D00849EC88DC9FDB7D41BA /* SafeExportTests.swift */,
+			);
+			path = PixSyncTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5FF0F556E1F4D12B9700579D /* PixSyncUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBFF01F911F9E760C678E022 /* Build configuration list for PBXNativeTarget "PixSyncUITests" */;
+			buildPhases = (
+				ADF3AB6C1EB8FBD29ECE3F5E /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7DA7E41E3C194DC8C81EFA74 /* PBXTargetDependency */,
+			);
+			name = PixSyncUITests;
+			packageProductDependencies = (
+			);
+			productName = PixSyncUITests;
+			productReference = 344FC8277C8716EF15F72381 /* PixSyncUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		7EFCCE1AED28BB94CB74BF24 /* PixSyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3540C410DB7256D0B800A458 /* Build configuration list for PBXNativeTarget "PixSyncTests" */;
+			buildPhases = (
+				6C1E7D0E1AB462817699CBF0 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PixSyncTests;
+			packageProductDependencies = (
+			);
+			productName = PixSyncTests;
+			productReference = 14846152B85D1ACCA0DA103A /* PixSyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AA1507816A51EA4C7FA40D0A /* PixSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18783F4EDECC8D41AA7F21A2 /* Build configuration list for PBXNativeTarget "PixSync" */;
+			buildPhases = (
+				AED942111E0CABC2134B1BA7 /* Sources */,
+				700E24E043B7902BD18A04D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PixSync;
+			packageProductDependencies = (
+			);
+			productName = PixSync;
+			productReference = 12DFE2615D30EFCB0B1991DD /* PixSync.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EC13D40F806513C557678445 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					5FF0F556E1F4D12B9700579D = {
+						TestTargetID = AA1507816A51EA4C7FA40D0A;
+					};
+				};
+			};
+			buildConfigurationList = 4BDD0BA22B1113D382FD695F /* Build configuration list for PBXProject "PixSync" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 2772A8F581A017A21F7095FB;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 6E2F37816F3AF45A87CE5BEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA1507816A51EA4C7FA40D0A /* PixSync */,
+				7EFCCE1AED28BB94CB74BF24 /* PixSyncTests */,
+				5FF0F556E1F4D12B9700579D /* PixSyncUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		700E24E043B7902BD18A04D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B7BAE8D90455E89A4B4E51E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6C1E7D0E1AB462817699CBF0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7648614ED8D2F101ACDC7708 /* Models.swift in Sources */,
+				ECB7A10D00D13F74527E037C /* SafeExport.swift in Sources */,
+				B88DB0613B5CEA3D7CB7740D /* SafeExportTests.swift in Sources */,
+				96BD517C7859444B53C25E72 /* SyncStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADF3AB6C1EB8FBD29ECE3F5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4424775F2CCE41CFDCD3CB93 /* MenuBarFlowTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AED942111E0CABC2134B1BA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				215EEDFA1A404CE5E4571455 /* Models.swift in Sources */,
+				14F4075EC7C20995617B5B86 /* PhotoSyncService.swift in Sources */,
+				85F1023394DCB7A6BAE02372 /* PixSyncApp.swift in Sources */,
+				01ADE8257C7A36397FC0F99B /* SafeExport.swift in Sources */,
+				381FA7BD87ACEAB18EA1B4E1 /* SyncStore.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7DA7E41E3C194DC8C81EFA74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA1507816A51EA4C7FA40D0A /* PixSync */;
+			targetProxy = 51370E76C18F22EDAE01C334 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		053EDED772BA43EF7713FBC4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = PixSync/PixSync.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PixSync;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "PixSync does not modify your Photos library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "PixSync reads your Photos library to export originals to your selected folder.";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		059A3DA0286BF44349752089 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.tests;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		43B41BACC66AF380608A6BA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.app;
+				PRODUCT_NAME = PixSync;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		77CC0813BA85BF2A737DE13B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = PixSync;
+			};
+			name = Release;
+		};
+		B5E90BBC54F0C88ECA6FA5F8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.app;
+				PRODUCT_NAME = PixSync;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		C29E6B2B190DBBF3035AB171 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.tests;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F0F28081FF7DA5C0B800F47F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = PixSync/PixSync.entitlements;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = PixSync;
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "PixSync does not modify your Photos library.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "PixSync reads your Photos library to export originals to your selected folder.";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		FE60BC095D277D0D98A57ABE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.pixsync.uitests;
+				SDKROOT = macosx;
+				TEST_TARGET_NAME = PixSync;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		18783F4EDECC8D41AA7F21A2 /* Build configuration list for PBXNativeTarget "PixSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43B41BACC66AF380608A6BA7 /* Debug */,
+				B5E90BBC54F0C88ECA6FA5F8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3540C410DB7256D0B800A458 /* Build configuration list for PBXNativeTarget "PixSyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C29E6B2B190DBBF3035AB171 /* Debug */,
+				059A3DA0286BF44349752089 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4BDD0BA22B1113D382FD695F /* Build configuration list for PBXProject "PixSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				053EDED772BA43EF7713FBC4 /* Debug */,
+				F0F28081FF7DA5C0B800F47F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FBFF01F911F9E760C678E022 /* Build configuration list for PBXNativeTarget "PixSyncUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE60BC095D277D0D98A57ABE /* Debug */,
+				77CC0813BA85BF2A737DE13B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EC13D40F806513C557678445 /* Project object */;
+}
