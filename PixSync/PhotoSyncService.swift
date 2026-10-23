@@ -119,12 +119,20 @@ final class PhotoSyncService: NSObject, ObservableObject, PHPhotoLibraryChangeOb
 
     let access = root.startAccessingSecurityScopedResource()
     defer { if access { root.stopAccessingSecurityScopedResource() } }
-    let assets = fetchAssets()
+    let assets = await fetchAssets()
     let activeIDs = Set(assets.map(\.localIdentifier))
     detectRemovals(activeIDs: activeIDs)
-    store.reconcileExistingFiles(in: root, assets: assets)
-    let queue = assets.flatMap { asset -> [(PHAsset, ExportKind)] in
-      includeEdited ? [(asset, .original), (asset, .edited)] : [(asset, .original)]
+    progressLabel = "Checking the destination…"
+    await store.reconcileExistingFiles(in: root, assets: assets)
+    progressLabel = "Preparing exports…"
+    var queue: [(PHAsset, ExportKind)] = []
+    for (index, asset) in assets.enumerated() {
+      queue.append((asset, .original))
+      if includeEdited { queue.append((asset, .edited)) }
+      if index % 256 == 255 {
+        progressLabel = "Preparing exports \(index + 1) of \(assets.count)…"
+        try? await Task.sleep(for: .milliseconds(1))
+      }
     }
     var processedCount = 0
     var wasInterrupted = false
@@ -163,20 +171,6 @@ final class PhotoSyncService: NSObject, ObservableObject, PHPhotoLibraryChangeOb
   }
 
   func initialReconcileAndSync() async {
-    guard let root = resolvedDestination() else { return }
-    guard await requestPhotoAccess() else {
-      needsSync = true
-      errorMessage = "Allow PixSync to access Photos in System Settings to continue."
-      return
-    }
-    let access = root.startAccessingSecurityScopedResource()
-    defer { if access { root.stopAccessingSecurityScopedResource() } }
-    let assets = fetchAssets()
-    let result = store.reconcileExistingFiles(in: root, assets: assets)
-    if result.matched > 0 || result.unmatched > 0 {
-      progressLabel =
-        "Found \(result.matched) existing exports, \(result.unmatched) unmatched files"
-    }
     await sync()
   }
 
@@ -208,11 +202,18 @@ final class PhotoSyncService: NSObject, ObservableObject, PHPhotoLibraryChangeOb
     } catch { errorMessage = error.localizedDescription }
   }
 
-  private func fetchAssets() -> [PHAsset] {
+  private func fetchAssets() async -> [PHAsset] {
     let result = PHAsset.fetchAssets(with: nil)
     assetFetchResult = result
     var assets: [PHAsset] = []
-    result.enumerateObjects { asset, _, _ in assets.append(asset) }
+    assets.reserveCapacity(result.count)
+    for index in 0..<result.count {
+      assets.append(result.object(at: index))
+      if index % 256 == 255 {
+        progressLabel = "Reading Photos \(index + 1) of \(result.count)…"
+        try? await Task.sleep(for: .milliseconds(1))
+      }
+    }
     return assets
   }
 

@@ -51,23 +51,32 @@ final class SyncStore: ObservableObject {
 
   func addAmbiguous(_ values: [AmbiguousMatch]) { ambiguousMatches = values }
 
-  func reconcileExistingFiles(in root: URL, assets: [PHAsset]) -> (matched: Int, unmatched: Int) {
+  func reconcileExistingFiles(in root: URL, assets: [PHAsset]) async -> (
+    matched: Int, unmatched: Int
+  ) {
     let known = Set(records.values.map(\.relativePath))
-    let assetsByName = Dictionary(
-      grouping: assets.flatMap { asset in
-        PHAssetResource.assetResources(for: asset).filter { $0.type == .photo || $0.type == .video }
-          .map { ($0.originalFilename, asset) }
-      }, by: \.0)
+    var assetsByName: [String: [PHAsset]] = [:]
+    for (index, asset) in assets.enumerated() {
+      for resource in PHAssetResource.assetResources(for: asset)
+      where resource.type == .photo || resource.type == .video {
+        assetsByName[resource.originalFilename, default: []].append(asset)
+      }
+      if index % 256 == 255 { try? await Task.sleep(for: .milliseconds(1)) }
+    }
     var matched = 0
     var unmatched = 0
     var unmatchedItems: [DestinationItem] = []
     var uncertain: [AmbiguousMatch] = []
+    var matchedRecords: [ExportRecord] = []
     guard
       let enumerator = FileManager.default.enumerator(
         at: root, includingPropertiesForKeys: [.isRegularFileKey, .isDirectoryKey],
         options: [.skipsHiddenFiles])
     else { return (0, 0) }
+    var scannedCount = 0
     while let file = enumerator.nextObject() as? URL {
+      scannedCount += 1
+      if scannedCount % 256 == 0 { try? await Task.sleep(for: .milliseconds(1)) }
       let values = try? file.resourceValues(forKeys: [.isRegularFileKey, .isDirectoryKey])
       let relative = String(file.path.dropFirst(root.path.count + 1))
       if values?.isDirectory == true {
@@ -80,12 +89,12 @@ final class SyncStore: ObservableObject {
       }
       guard !known.contains(relative) else { continue }
       let candidates = assetsByName[file.lastPathComponent] ?? []
-      if candidates.count == 1, let asset = candidates.first?.1 {
+      if candidates.count == 1, let asset = candidates.first {
         let record = ExportRecord(
           assetID: asset.localIdentifier, kind: .original, relativePath: relative,
           filename: file.lastPathComponent, modificationDate: asset.modificationDate,
           fingerprint: fingerprint(asset))
-        save(record)
+        matchedRecords.append(record)
         matched += 1
       } else {
         unmatched += 1
@@ -96,6 +105,8 @@ final class SyncStore: ObservableObject {
         }
       }
     }
+    for record in matchedRecords { records[record.id] = record }
+    if !matchedRecords.isEmpty { persist() }
     setUnmatchedDestinationItems(unmatchedItems)
     addAmbiguous(uncertain)
     return (matched, unmatched)
